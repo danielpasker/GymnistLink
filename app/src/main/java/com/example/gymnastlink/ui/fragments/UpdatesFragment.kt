@@ -35,6 +35,7 @@ class UpdatesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // TODO: delete when handling data from a real source
         if (postList.isEmpty()) {
             postList.add(
                 Post(

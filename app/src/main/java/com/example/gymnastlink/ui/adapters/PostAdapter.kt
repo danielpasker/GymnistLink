@@ -1,5 +1,6 @@
 package com.example.gymnastlink.ui.adapters
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,12 @@ class PostAdapter(private val posts: List<Post>) :
         holder.content.text = post.content
         holder.likeCount.text = formatNumber(post.likeCount)
         holder.date.text = formatDate(post.date)
-        post.image?.let { holder.postImage.setImageResource(it) }
+
+        post.image?.let {
+            BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
+                holder.postImage.setImageBitmap(bitmap)
+            }
+        }
     }
 
     override fun getItemCount(): Int = posts.size

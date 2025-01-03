@@ -7,7 +7,7 @@ data class Post(
     val userTitle: String,
     val title: String,
     val content: String,
-    val image: Int?,
+    val image: ByteArray?,
     val likeCount: Int,
     val date: LocalDate
 )

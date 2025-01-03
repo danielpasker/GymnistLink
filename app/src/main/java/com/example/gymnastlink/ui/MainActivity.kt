@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fragmentTitle = findViewById(R.id.fragment_title)
+        // TODO: use the real fragment as we create them
         bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
             setOnItemSelectedListener { item ->
                 when (item.itemId) {
