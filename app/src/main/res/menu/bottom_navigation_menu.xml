@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/updates_page_item"
+        android:enabled="true"
+        android:icon="@drawable/updates_nav_icon"
+        android:title="@string/updates" />
+    <item
+        android:id="@+id/workouts_page_item"
+        android:enabled="true"
+        android:icon="@drawable/workouts_nav_icon"
+        android:title="@string/workouts" />
+    <item
+        android:id="@+id/nutrition_page_item"
+        android:enabled="true"
+        android:icon="@drawable/nutrition_nav_icon"
+        android:title="@string/nutrition" />
+    <item
+        android:id="@+id/profile_page_item"
+        android:enabled="true"
+        android:icon="@drawable/profile_nav_icon"
+        android:title="@string/profile" />
+</menu>

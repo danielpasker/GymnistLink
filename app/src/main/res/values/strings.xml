@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GymnastLink</string>
+    <string name="updates">Updates</string>
+    <string name="workouts">Workouts</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="profile">Profile</string>
+    <string name="post_image_description">image included in post</string>
+    <string name="new_post_fab_description">add new post</string>
+    <string name="new_post_fab_text">New Post</string>
 </resources>
