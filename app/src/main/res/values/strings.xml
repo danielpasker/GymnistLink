@@ -12,4 +12,5 @@
     <string name="upload_image_text">Upload Image</string>
     <string name="post_picture_description">post_uploaded_picture</string>
     <string name="save_new_post_description">save new post</string>
+    <string name="remove_image_text">Remove Image</string>
 </resources>

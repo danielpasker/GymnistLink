@@ -70,13 +70,23 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnUpload"
+                        android:id="@+id/upload_image_button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@color/cyan_button"
                         android:text="@string/upload_image_text"
                         app:icon="@drawable/ic_attach_file" />
+
+                    <Button
+                        android:id="@+id/remove_image_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
+                        android:text="@string/remove_image_text"
+                        android:visibility="gone"
+                        app:icon="@drawable/ic_trash" />
 
                 </LinearLayout>
 

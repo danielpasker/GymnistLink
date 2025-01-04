@@ -43,8 +43,9 @@ class UpdatesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        newPostFab = view.findViewById(R.id.new_post_fab)
-        newPostFab.setOnClickListener { onNewPostFabClick() }
+        newPostFab = view.findViewById<ExtendedFloatingActionButton>(R.id.new_post_fab).apply {
+            setOnClickListener { onNewPostFabClick() }
+        }
 
         postsActivityLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
