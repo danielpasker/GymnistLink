@@ -21,18 +21,13 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.app_name)
 
         fragmentTitle = findViewById(R.id.fragment_title)
         bottomNavigation = findViewById(R.id.bottom_navigation)
         val navHostController: NavHostFragment? =
             supportFragmentManager.findFragmentById(R.id.main_nav_controller) as? NavHostFragment
         navController = navHostController?.navController!!
-        navController.let {
-            NavigationUI.setupActionBarWithNavController(
-                activity = this,
-                navController = it
-            )
-        }
         navController.let { NavigationUI.setupWithNavController(bottomNavigation, it) }
     }
 
