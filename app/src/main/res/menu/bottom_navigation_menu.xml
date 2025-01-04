@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/updates_page_item"
+        android:id="@+id/updatesFragment"
         android:enabled="true"
         android:icon="@drawable/updates_nav_icon"
         android:title="@string/updates" />

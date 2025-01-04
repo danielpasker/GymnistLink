@@ -4,14 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.gymnastlink.R
-import com.example.gymnastlink.ui.fragments.UpdatesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var fragmentTitle: TextView
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,44 +21,17 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.app_name)
 
         fragmentTitle = findViewById(R.id.fragment_title)
-        // TODO: use the real fragment as we create them
-        bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
-            setOnItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.updates_page_item -> {
-                        loadFragment(UpdatesFragment())
-                        true
-                    }
-                    R.id.workouts_page_item -> {
-                        loadFragment(UpdatesFragment())
-                        true
-                    }
-                    R.id.nutrition_page_item -> {
-                        loadFragment(UpdatesFragment())
-                        true
-                    }
-                    R.id.profile_page_item -> {
-                        loadFragment(UpdatesFragment())
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-
-            selectedItemId = R.id.updates_page_item
-        }
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+        val navHostController: NavHostFragment? =
+            supportFragmentManager.findFragmentById(R.id.main_nav_controller) as? NavHostFragment
+        navController = navHostController?.navController!!
+        navController.let { NavigationUI.setupWithNavController(bottomNavigation, it) }
     }
 
     fun updateFragmentTitle(title: String) {
         fragmentTitle.text = title
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
     }
 }
