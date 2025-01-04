@@ -1,21 +1,29 @@
 package com.example.gymnastlink.ui.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Post
 import com.example.gymnastlink.ui.MainActivity
+import com.example.gymnastlink.ui.NewPostActivity
 import com.example.gymnastlink.ui.adapters.PostAdapter
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import java.time.LocalDate
 
 class UpdatesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PostAdapter
+    private lateinit var newPostFab: ExtendedFloatingActionButton
+    private lateinit var postsActivityLauncher: ActivityResultLauncher<Intent>
 
     companion object {
         val postList = mutableListOf<Post>()
@@ -34,6 +42,16 @@ class UpdatesFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        newPostFab = view.findViewById(R.id.new_post_fab)
+        newPostFab.setOnClickListener { onNewPostFabClick() }
+
+        postsActivityLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    adapter.notifyDataSetChanged()
+                }
+            }
 
         // TODO: delete when handling data from a real source
         if (postList.isEmpty()) {
@@ -74,6 +92,12 @@ class UpdatesFragment : Fragment() {
 
         adapter = PostAdapter(postList)
         recyclerView.adapter = adapter
+    }
+
+    private fun onNewPostFabClick() {
+        postsActivityLauncher.launch(
+            Intent(requireContext(), NewPostActivity::class.java)
+        )
     }
 
     override fun onResume() {

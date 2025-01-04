@@ -11,13 +11,14 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.GymnastLink">
         <activity
-            android:name="com.example.gymnastlink.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.NewPostActivity" />
     </application>
 
 </manifest>

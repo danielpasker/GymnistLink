@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.app_name)
 
         fragmentTitle = findViewById(R.id.fragment_title)
         // TODO: use the real fragment as we create them
@@ -29,14 +30,17 @@ class MainActivity : AppCompatActivity() {
                         loadFragment(UpdatesFragment())
                         true
                     }
+
                     R.id.workouts_page_item -> {
                         loadFragment(UpdatesFragment())
                         true
                     }
+
                     R.id.nutrition_page_item -> {
                         loadFragment(UpdatesFragment())
                         true
                     }
+
                     R.id.profile_page_item -> {
                         loadFragment(UpdatesFragment())
                         true

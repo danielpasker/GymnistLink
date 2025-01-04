@@ -11,4 +11,6 @@
     <color name="red">#A90000</color>
 
     <color name="layout_surface">#68000000</color>
+    <color name="card_cyan_background">#003028</color>
+    <color name="fab_icon_color">@color/black</color>
 </resources>
