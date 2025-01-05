@@ -5,7 +5,7 @@
         android:icon="@drawable/updates_nav_icon"
         android:title="@string/updates" />
     <item
-        android:id="@+id/workouts_page_item"
+        android:id="@+id/workoutsFragment"
         android:enabled="true"
         android:icon="@drawable/workouts_nav_icon"
         android:title="@string/workouts" />

@@ -10,4 +10,9 @@
         android:name="com.example.gymnastlink.ui.fragments.UpdatesFragment"
         android:label="fragment_updates"
         tools:layout="@layout/fragment_updates" />
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.example.gymnastlink.ui.fragments.WorkoutsFragment"
+        android:label="fragment_workouts"
+        tools:layout="@layout/fragment_workouts" />
 </navigation>

@@ -9,6 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#A2A2A2</color>
     <color name="red">#7A0000</color>
+    <color name="light_blue">#1A6EB1</color>
+    <color name="mid_blue">#023261</color>
+    <color name="dark_blue">#000916</color>
+    <color name="search_blue">#234E73</color>
 
     <color name="layout_surface">#F3EDF7</color>
 </resources>
