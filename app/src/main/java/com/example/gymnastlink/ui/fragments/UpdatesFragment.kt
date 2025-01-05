@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Post
 import com.example.gymnastlink.ui.MainActivity
-import com.example.gymnastlink.ui.NewPostActivity
 import com.example.gymnastlink.ui.adapters.PostAdapter
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import java.time.LocalDate
@@ -38,13 +38,15 @@ class UpdatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.updateFragmentTitle(getString(R.string.updates))
+        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.updates))
 
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         newPostFab = view.findViewById<ExtendedFloatingActionButton>(R.id.new_post_fab).apply {
-            setOnClickListener { onNewPostFabClick() }
+            setOnClickListener {
+                findNavController().navigate(R.id.action_updatesFragment_to_newPostFragment)
+            }
         }
 
         postsActivityLauncher =
@@ -93,12 +95,6 @@ class UpdatesFragment : Fragment() {
 
         adapter = PostAdapter(postList)
         recyclerView.adapter = adapter
-    }
-
-    private fun onNewPostFabClick() {
-        postsActivityLauncher.launch(
-            Intent(requireContext(), NewPostActivity::class.java)
-        )
     }
 
     override fun onResume() {

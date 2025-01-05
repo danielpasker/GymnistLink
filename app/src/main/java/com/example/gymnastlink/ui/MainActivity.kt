@@ -9,19 +9,18 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.gymnastlink.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.color.DynamicColors
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var fragmentTitle: TextView
+    private lateinit var toolbar: Toolbar
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        DynamicColors.applyToActivityIfAvailable(this)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.app_name)
 
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         navController.let { NavigationUI.setupWithNavController(bottomNavigation, it) }
     }
 
-    fun updateFragmentTitle(title: String) {
+    fun setFragmentTitle(title: String) {
         fragmentTitle.text = title
     }
 }
