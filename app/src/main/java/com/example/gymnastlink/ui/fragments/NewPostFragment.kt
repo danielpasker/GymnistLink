@@ -22,7 +22,6 @@ class NewPostFragment : Fragment() {
     private lateinit var uploadImageButton: Button
     private lateinit var removeImageButton: Button
     private lateinit var imageView: ImageView
-    private lateinit var cancelFab: FloatingActionButton
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -33,7 +32,7 @@ class NewPostFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_new_post, container, false)
         (activity as? MainActivity)?.setFragmentTitle(getString(R.string.new_post_text))
 
-        cancelFab = view.findViewById<FloatingActionButton>(R.id.cancel_fab).apply {
+        view.findViewById<FloatingActionButton>(R.id.cancel_fab).apply {
             setOnClickListener {
                 findNavController().navigateUp()
             }
@@ -46,13 +45,14 @@ class NewPostFragment : Fragment() {
             setOnClickListener { removeImage() }
         }
 
-        pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                result.data?.data?.let { uri ->
-                    handleImageSelection(uri)
+        pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    result.data?.data?.let { uri ->
+                        handleImageSelection(uri)
+                    }
                 }
             }
-        }
 
         return view
     }

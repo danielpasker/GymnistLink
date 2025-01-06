@@ -22,7 +22,6 @@ import java.time.LocalDate
 class UpdatesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PostAdapter
-    private lateinit var newPostFab: ExtendedFloatingActionButton
     private lateinit var postsActivityLauncher: ActivityResultLauncher<Intent>
 
     companion object {
@@ -43,7 +42,7 @@ class UpdatesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        newPostFab = view.findViewById<ExtendedFloatingActionButton>(R.id.new_post_fab).apply {
+        view.findViewById<ExtendedFloatingActionButton>(R.id.new_post_fab).apply {
             setOnClickListener {
                 findNavController().navigate(R.id.action_updatesFragment_to_newPostFragment)
             }
