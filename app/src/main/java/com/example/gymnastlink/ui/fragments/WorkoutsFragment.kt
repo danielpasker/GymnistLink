@@ -9,21 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
+import com.example.gymnastlink.model.BodyMuscle
+import com.example.gymnastlink.model.ExerciseItem
 import com.example.gymnastlink.ui.MainActivity
+import com.example.gymnastlink.ui.adapters.ExerciseAdapter
 import java.lang.reflect.Field
 
 class WorkoutsFragment : Fragment() {
 
-    private lateinit var searchView: android.widget.SearchView
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         */
-//    }
+    private lateinit var searchView: SearchView
+    private lateinit var searchResultRecyclerView: RecyclerView
+    private lateinit var myPlanRecyclerView: RecyclerView
+    private lateinit var searchResultAdapter: ExerciseAdapter
+    private lateinit var myPlanAdapter: ExerciseAdapter
+
+    companion object {
+        val searchResultList = mutableListOf<ExerciseItem>()
+        val myPlanList = mutableListOf<ExerciseItem>()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +43,77 @@ class WorkoutsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? MainActivity)?.updateFragmentTitle(getString(R.string.workouts))
-        searchView = view.findViewById(R.id.workout_search)
 
+        searchView = view.findViewById(R.id.workout_search)
+        searchResultRecyclerView = view.findViewById(R.id.search_results_recyclerview)
+        searchResultRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        myPlanRecyclerView = view.findViewById(R.id.my_plan_recyclerview)
+        myPlanRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+//        TODO: needs to be removed, get data from real source
+        if(searchResultList.isEmpty()){
+            searchResultList.add(
+                ExerciseItem(
+                    "John Smith",
+                    BodyMuscle.BICEPS,
+                    null
+                )
+            )
+            searchResultList.add(
+                ExerciseItem(
+                    "Yoni Yonitan",
+                    BodyMuscle.DELTOID,
+                    null
+                )
+            )
+            searchResultList.add(
+                ExerciseItem(
+                    "Yael Cohen",
+                    BodyMuscle.FOREARMS,
+                    null
+                )
+            )
+        }
+
+        if(myPlanList.isEmpty()){
+            myPlanList.add(
+                ExerciseItem(
+                    "Rotem Sela",
+                    BodyMuscle.GLUTEUS_MAXIMUS,
+                    null
+                )
+            )
+            myPlanList.add(
+                ExerciseItem(
+                    "Miri Meirman",
+                    BodyMuscle.QUADRICEPS,
+                    null
+                )
+            )
+            myPlanList.add(
+                ExerciseItem(
+                    "Yael Atias",
+                    BodyMuscle.FOREARMS,
+                    null
+                )
+            )
+        }
+
+        searchResultAdapter = ExerciseAdapter(searchResultList)
+        searchResultRecyclerView.adapter = searchResultAdapter
+        myPlanAdapter = ExerciseAdapter(myPlanList)
+        myPlanRecyclerView.adapter = myPlanAdapter
+
+        changeSearchDisplay()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchResultAdapter.notifyDataSetChanged()
+        myPlanAdapter.notifyDataSetChanged()
+    }
+
+    private fun changeSearchDisplay() {
         try {
             val searchEditTextField: Field = SearchView::class.java.getDeclaredField("mSearchSrcTextView")
             searchEditTextField.isAccessible = true
@@ -50,5 +126,4 @@ class WorkoutsFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
 }
