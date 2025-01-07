@@ -1,92 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.fragments.WorkoutsFragment">
 
     <LinearLayout
-        android:id="@+id/search_workout_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/gradient_background_blue"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/workout_search_Description"
+        <LinearLayout
+            android:id="@+id/search_workout_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"
-            android:text="Use our providers to find your desired exercise"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/gradient_background_blue"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="15dp">
 
-        <SearchView
-            android:id="@+id/workout_search"
+            <TextView
+                android:id="@+id/workout_search_Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="Use our providers to find your desired exercise"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <SearchView
+                android:id="@+id/workout_search"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="30dp"
+                android:iconifiedByDefault="false"
+                android:background="@drawable/workout_searchview"
+                android:queryHint="Search for an exercise" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/workout_lists_layout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/workout_searchview"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search for an exercise" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exercises_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/workout_lists_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_workout_layout"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/search_results_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Search Results"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_results_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
-
-        <TextView
-            android:id="@+id/my_pan_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="My Plan"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_plan_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="70dp"/>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
