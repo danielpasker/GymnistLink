@@ -42,16 +42,17 @@ class WorkoutsFragment : Fragment() {
         (activity as? MainActivity)?.updateFragmentTitle(getString(R.string.workouts))
 
         searchView = view.findViewById(R.id.workout_search)
-        changeSearchDisplay()
+        changeSearchViewHintTextDisplay()
 
         exerciseRecyclerView = view.findViewById(R.id.exercises_recyclerview)
         exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = ExerciseAdapter(exerciseList)
         exerciseRecyclerView.adapter = adapter
         // TODO: needs to be removed, get data from real source
-        exerciseList.clear()
-        loadSearchedExercises()
-        loadMyExercises()
+        if (exerciseList.isEmpty()) {
+            loadSearchedExercises()
+            loadMyExercises()
+        }
     }
 
     override fun onResume() {
@@ -59,7 +60,7 @@ class WorkoutsFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun changeSearchDisplay() {
+    private fun changeSearchViewHintTextDisplay() {
         try {
             val searchEditTextField: Field = SearchView::class.java.getDeclaredField("mSearchSrcTextView")
             searchEditTextField.isAccessible = true
@@ -74,13 +75,13 @@ class WorkoutsFragment : Fragment() {
     }
     // TODO: needs to be changed, get data from real source
     private fun loadSearchedExercises(){
-        exerciseList.add("Recently Searched")
-        val recentlySearchedIndex = exerciseList.indexOf("Recently Searched")
+        exerciseList.add(getString(R.string.recently_searched_header))
+        val recentlySearchedIndex = exerciseList.indexOf(getString(R.string.recently_searched_header))
         if (recentlySearchedIndex != -1) {
             val exercises = listOf(
-                ExerciseItem("John Smith", BodyMuscle.BICEPS, null),
-                ExerciseItem("Yoni Yonitan", BodyMuscle.DELTOID, null),
-                ExerciseItem("Yael Cohen", BodyMuscle.FOREARMS, null)
+                ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
+                ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
+                ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
             )
             exerciseList.addAll(recentlySearchedIndex + 1, exercises)
             adapter.notifyItemRangeInserted(recentlySearchedIndex + 1, exercises.size)
@@ -88,13 +89,13 @@ class WorkoutsFragment : Fragment() {
     }
     // TODO: needs to be changed, get data from real source
     private fun loadMyExercises(){
-        exerciseList.add("My Plan")
-        val myPlanIndex = exerciseList.indexOf("My Plan")
+        exerciseList.add(getString(R.string.my_plan_header))
+        val myPlanIndex = exerciseList.indexOf(getString(R.string.my_plan_header))
         if (myPlanIndex != -1) {
             val exercises1 = listOf(
-                ExerciseItem("Rotem Sela", BodyMuscle.GLUTEUS_MAXIMUS,null),
-                ExerciseItem("Miri Meirman", BodyMuscle.QUADRICEPS, null),
-                ExerciseItem("Yael Atias", BodyMuscle.FOREARMS, null)
+                ExerciseItem("Lateral Step-Up", BodyMuscle.GLUTEUS_MAXIMUS,null),
+                ExerciseItem("Squats", BodyMuscle.QUADRICEPS, null),
+                ExerciseItem("Hammer Curl", BodyMuscle.FOREARMS, null)
             )
             exerciseList.addAll(myPlanIndex + 1, exercises1)
             adapter.notifyItemRangeInserted(myPlanIndex + 1, exercises1.size)

@@ -7,4 +7,10 @@
     <string name="post_image_description">image included in post</string>
     <string name="new_post_fab_description">add new post</string>
     <string name="new_post_fab_text">New Post</string>
+    <string name="temp_exercise_title">Exercise title</string>
+    <string name="temp_body_part">Body part</string>
+    <string name="search_introduction">Use our providers to find your desired exercise</string>
+    <string name="search_hint">Search for an exercise</string>
+    <string name="recently_searched_header">Recently Searched</string>
+    <string name="my_plan_header">My Plan</string>
 </resources>
