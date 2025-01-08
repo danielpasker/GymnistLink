@@ -15,4 +15,7 @@
     <color name="cyan_button">#008E77</color>
     <color name="cancel_fab_color">@color/black</color>
     <color name="fab_icon_color">@color/white</color>
+    <color name="comment_field_fill">@color/layout_surface</color>
+    <color name="comment_field_shadow">@color/black</color>
+    <color name="add_comment_icon_fll">@color/white</color>
 </resources>

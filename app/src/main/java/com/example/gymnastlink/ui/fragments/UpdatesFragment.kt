@@ -37,7 +37,11 @@ class UpdatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.updates))
+
+        val mainActivity = activity as? MainActivity
+        mainActivity?.setFragmentTitle(getString(R.string.updates))
+        mainActivity?.showBottomNavigation(true)
+        mainActivity?.showReturnButtonOnToolbar(false)
 
         recyclerView = view.findViewById(R.id.post_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

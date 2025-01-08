@@ -13,4 +13,6 @@
     <string name="post_picture_description">post_uploaded_picture</string>
     <string name="save_new_post_description">save new post</string>
     <string name="remove_image_text">Remove Image</string>
+    <string name="add_new_comment">Add new comment</string>
+    <string name="comments">Comments</string>
 </resources>

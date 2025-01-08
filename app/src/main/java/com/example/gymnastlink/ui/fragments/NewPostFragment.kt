@@ -12,10 +12,8 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.gymnastlink.R
 import com.example.gymnastlink.ui.MainActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NewPostFragment : Fragment() {
 
@@ -25,18 +23,20 @@ class NewPostFragment : Fragment() {
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_new_post, container, false)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.new_post_text))
+        return inflater.inflate(R.layout.fragment_new_post, container, false)
+    }
 
-        view.findViewById<FloatingActionButton>(R.id.cancel_fab).apply {
-            setOnClickListener {
-                findNavController().navigateUp()
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as? MainActivity
+        mainActivity?.setFragmentTitle(getString(R.string.new_post_text))
+        mainActivity?.showReturnButtonOnToolbar(true)
+        mainActivity?.showBottomNavigation(false)
+
         imageView = view.findViewById(R.id.imgView)
         uploadImageButton = view.findViewById<Button>(R.id.upload_image_button).apply {
             setOnClickListener { openImagePicker() }
@@ -53,8 +53,6 @@ class NewPostFragment : Fragment() {
                     }
                 }
             }
-
-        return view
     }
 
     private fun openImagePicker() {

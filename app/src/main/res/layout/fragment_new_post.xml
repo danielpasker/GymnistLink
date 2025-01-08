@@ -90,42 +90,22 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_post_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
         android:clipChildren="false"
+        android:contentDescription="@string/save_new_post_description"
         android:gravity="center|end"
         android:orientation="horizontal"
+        app:backgroundTint="@color/cyan_button"
+        app:fabCustomSize="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/ic_post_add"
+        app:tint="@color/fab_icon_color" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cancel_fab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:clickable="true"
-            android:contentDescription="@string/save_new_post_description"
-            app:backgroundTint="@color/cancel_fab_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_close"
-            app:tint="@color/white" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/new_post_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@string/save_new_post_description"
-            app:backgroundTint="@color/cyan_button"
-            app:fabCustomSize="65dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/ic_post_add"
-            app:tint="@color/fab_icon_color" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
