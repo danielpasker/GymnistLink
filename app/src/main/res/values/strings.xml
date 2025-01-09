@@ -13,6 +13,13 @@
     <string name="post_picture_description">post_uploaded_picture</string>
     <string name="save_new_post_description">save new post</string>
     <string name="remove_image_text">Remove Image</string>
+    <string name="new_post_fab_text">New Post</string>
+    <string name="temp_exercise_title">Exercise title</string>
+    <string name="temp_body_part">Body part</string>
+    <string name="search_introduction">Use our providers to find your desired exercise</string>
+    <string name="search_hint">Search for an exercise</string>
+    <string name="recently_searched_header">Recently Searched</string>
+    <string name="my_plan_header">My Plan</string>
     <string name="add_new_comment">Add new comment</string>
     <string name="comments">Comments</string>
 </resources>
