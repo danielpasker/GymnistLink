@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
@@ -18,6 +19,10 @@ import com.example.gymnastlink.model.ExerciseItem
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
 import java.lang.reflect.Field
+
+interface onExerciseItemClickListener {
+    fun onExerciseClick(position: Int, exerciseItem: ExerciseItem)
+}
 
 class WorkoutsFragment : Fragment() {
 
@@ -47,6 +52,17 @@ class WorkoutsFragment : Fragment() {
         exerciseRecyclerView = view.findViewById(R.id.exercises_recyclerview)
         exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = ExerciseAdapter(exerciseList)
+
+        adapter.listener = object : onExerciseItemClickListener {
+            override fun onExerciseClick(position: Int, exerciseItem: ExerciseItem) {
+                val bundle = Bundle().apply {
+                    putInt("position", position)
+                    putParcelable("exerciseItem", exerciseItem)
+                }
+                findNavController().navigate(R.id.action_workoutsFragment_to_exerciseDetailsFragment, bundle)
+            }
+        }
+
         exerciseRecyclerView.adapter = adapter
         // TODO: needs to be removed, get data from real source
         if (exerciseList.isEmpty()) {

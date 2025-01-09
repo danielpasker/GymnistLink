@@ -1,6 +1,7 @@
 package com.example.gymnastlink.model
 
 enum class BodyMuscle(val muscleGroup: String) {
+    UNKNOWN(""),
     // Upper Body Muscles
     DELTOID("Shoulders"),
     TRAPEZIUS("Upper Back"),

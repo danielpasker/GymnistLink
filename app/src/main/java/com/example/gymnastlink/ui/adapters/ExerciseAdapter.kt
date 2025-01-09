@@ -9,12 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.ExerciseItem
+import com.example.gymnastlink.ui.fragments.onExerciseItemClickListener
 
 class ExerciseAdapter(private val exercises: List<Any>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_HEADER = 0
     private val TYPE_ITEM = 1
+
+    lateinit var listener: onExerciseItemClickListener
 
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleText: TextView = itemView.findViewById(R.id.titleText)
@@ -24,12 +27,21 @@ class ExerciseAdapter(private val exercises: List<Any>) :
         }
     }
 
-    class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ExerciseViewHolder(itemView: View, listener: onExerciseItemClickListener?) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.exercise_name)
         val mainMuscle: TextView = itemView.findViewById(R.id.exercise_main_muscle)
         val exerciseImage: ImageView = itemView.findViewById(R.id.exercise_image)
+        lateinit var exerciseItem: ExerciseItem
+
+
+        init {
+            itemView.setOnClickListener{
+                listener?.onExerciseClick(adapterPosition, exerciseItem)
+            }
+        }
 
         fun bind(exercise: ExerciseItem){
+            exerciseItem = exercise
             name.text = exercise.name
             mainMuscle.text = exercise.mainMuscle.toString()
             exercise.image?.let {
@@ -47,7 +59,7 @@ class ExerciseAdapter(private val exercises: List<Any>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_HEADER -> HeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercises_header, parent, false))
-            TYPE_ITEM -> ExerciseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false))
+            TYPE_ITEM -> ExerciseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false), listener)
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
