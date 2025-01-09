@@ -6,6 +6,13 @@
     <string name="profile">Profile</string>
     <string name="post_image_description">image included in post</string>
     <string name="new_post_fab_description">add new post</string>
+    <string name="new_post_text">New Post</string>
+    <string name="post_title_hint">Enter post title…</string>
+    <string name="post_content_hint">Enter post content…</string>
+    <string name="upload_image_text">Upload Image</string>
+    <string name="post_picture_description">post_uploaded_picture</string>
+    <string name="save_new_post_description">save new post</string>
+    <string name="remove_image_text">Remove Image</string>
     <string name="new_post_fab_text">New Post</string>
     <string name="temp_exercise_title">Exercise title</string>
     <string name="temp_body_part">Body part</string>

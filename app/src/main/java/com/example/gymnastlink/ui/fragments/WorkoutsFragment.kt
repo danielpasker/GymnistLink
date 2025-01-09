@@ -39,7 +39,7 @@ class WorkoutsFragment : Fragment() {
     @SuppressLint("DiscouragedPrivateApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.updateFragmentTitle(getString(R.string.workouts))
+        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.workouts))
 
         searchView = view.findViewById(R.id.workout_search)
         changeSearchViewHintTextDisplay()
