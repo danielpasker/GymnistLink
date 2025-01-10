@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
@@ -15,6 +16,9 @@ import com.example.gymnastlink.model.BodyMuscle
 import com.example.gymnastlink.model.ExerciseItem
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WorkoutsFragment : Fragment() {
 
@@ -46,14 +50,6 @@ class WorkoutsFragment : Fragment() {
         searchResultsRecyclerView = view.findViewById(R.id.search_results_recyclerview)
         myPlanRecyclerView = view.findViewById(R.id.my_plan_recyclerview)
 
-        // TODO: needs to be changed, get data from db
-        val dummyPlan = listOf(
-            ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
-            ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
-            ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
-        )
-        myPlan.addAll(dummyPlan)
-
         myPlanAdapter = ExerciseAdapter(myPlan)
         myPlanRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         myPlanRecyclerView.adapter = myPlanAdapter
@@ -62,20 +58,12 @@ class WorkoutsFragment : Fragment() {
         searchResultsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         searchResultsRecyclerView.adapter = searchResultAdapter
 
-        workoutSearchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        workoutSearchEditText.addTextChangedListener(createTextWatcher())
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.isNullOrEmpty()) {
-                    searchResultsLayout.visibility = View.GONE
-                } else {
-                    searchResultsLayout.visibility = View.VISIBLE
-                    loadSearchResults()
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        // Load data asynchronously
+        lifecycleScope.launch {
+            loadMyExercises()
+        }
     }
 
     override fun onResume() {
@@ -84,14 +72,59 @@ class WorkoutsFragment : Fragment() {
         searchResultAdapter.notifyDataSetChanged()
     }
 
-    // TODO: needs to be changed, get data from real source
-    private fun loadSearchResults() {
+    private fun createTextWatcher(): TextWatcher {
+        return object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()) {
+                    searchResultsLayout.visibility = View.GONE
+                } else {
+                    searchResultsLayout.visibility = View.VISIBLE
+                    // Filter search results asynchronously
+                    lifecycleScope.launch {
+                        getSearchResults(s.toString())
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+    }
+
+    private suspend fun loadMyExercises() {
+        withContext(Dispatchers.IO) {
+            // Simulate data loading
+            val dummyPlan = listOf(
+                ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
+                ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
+                ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
+            )
+            myPlan.clear()
+            myPlan.addAll(dummyPlan)
+        }
+        withContext(Dispatchers.Main) {
+            myPlanAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private suspend fun getSearchResults(query: String) {
         val dummyResults = listOf(
             ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
             ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
             ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
         )
-        searchResults.addAll(dummyResults)
-        searchResultAdapter.notifyDataSetChanged()
+
+        withContext(Dispatchers.IO) {
+            // Simulate filtering logic
+            val filteredResults = dummyResults.filter {
+                it.name.contains(query, ignoreCase = true)
+            }
+            searchResults.clear()
+            searchResults.addAll(filteredResults)
+        }
+        withContext(Dispatchers.Main) {
+            searchResultAdapter.notifyDataSetChanged()
+        }
     }
 }

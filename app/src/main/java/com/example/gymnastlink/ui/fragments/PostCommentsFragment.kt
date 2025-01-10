@@ -30,7 +30,6 @@ class PostCommentsFragment : Fragment() {
 
         val mainActivity = activity as? MainActivity
         mainActivity?.setFragmentTitle(getString(R.string.comments))
-        mainActivity?.showBottomNavigation(false)
         mainActivity?.showReturnButtonOnToolbar(true)
 
         recyclerView = view.findViewById(R.id.post_recycler_view)

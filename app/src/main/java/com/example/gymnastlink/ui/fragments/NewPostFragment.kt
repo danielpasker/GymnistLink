@@ -35,7 +35,6 @@ class NewPostFragment : Fragment() {
         val mainActivity = activity as? MainActivity
         mainActivity?.setFragmentTitle(getString(R.string.new_post_text))
         mainActivity?.showReturnButtonOnToolbar(true)
-        mainActivity?.showBottomNavigation(false)
 
         imageView = view.findViewById(R.id.imgView)
         uploadImageButton = view.findViewById<Button>(R.id.upload_image_button).apply {
