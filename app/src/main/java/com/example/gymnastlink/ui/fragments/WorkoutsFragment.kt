@@ -53,10 +53,12 @@ class WorkoutsFragment : Fragment() {
         myPlanAdapter = ExerciseAdapter(myPlan)
         myPlanRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         myPlanRecyclerView.adapter = myPlanAdapter
+        myPlanRecyclerView.isNestedScrollingEnabled = false
 
         searchResultAdapter = ExerciseAdapter(searchResults)
         searchResultsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         searchResultsRecyclerView.adapter = searchResultAdapter
+        searchResultsRecyclerView.isNestedScrollingEnabled = false
 
         workoutSearchEditText.addTextChangedListener(createTextWatcher())
 
