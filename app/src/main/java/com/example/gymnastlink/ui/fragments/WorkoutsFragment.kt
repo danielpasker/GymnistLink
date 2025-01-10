@@ -1,5 +1,6 @@
 package com.example.gymnastlink.ui.fragments
 
+import ExerciseItem
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
@@ -14,8 +15,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
-import com.example.gymnastlink.model.BodyMuscle
-import com.example.gymnastlink.model.ExerciseItem
+import com.example.gymnastlink.model.BodyPart
+import com.example.gymnastlink.model.Equipment
+import com.example.gymnastlink.model.TargetMuscle
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
 import java.lang.reflect.Field
@@ -95,9 +97,21 @@ class WorkoutsFragment : Fragment() {
         val recentlySearchedIndex = exerciseList.indexOf(getString(R.string.recently_searched_header))
         if (recentlySearchedIndex != -1) {
             val exercises = listOf(
-                ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
-                ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
-                ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
+                ExerciseItem("1","Dumbbells",Equipment.DUMBBELL,TargetMuscle.BICEPS,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "sit in a chair",
+                        "hold the dumbbells",
+                        "work on your biceps with the dumbbells"
+                    ),""),
+                ExerciseItem("2","Leg Extinction",Equipment.ELLIPTICAL_MACHINE,TargetMuscle.QUADS,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "get your legs up",
+                        "get your legs down"
+                    ),""),
+                ExerciseItem("3","Pull Ups",Equipment.BODY_WEIGHT,TargetMuscle.SPINE,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "Get up and down with all of your body"
+                    ),"")
             )
             exerciseList.addAll(recentlySearchedIndex + 1, exercises)
             adapter.notifyItemRangeInserted(recentlySearchedIndex + 1, exercises.size)
@@ -109,9 +123,12 @@ class WorkoutsFragment : Fragment() {
         val myPlanIndex = exerciseList.indexOf(getString(R.string.my_plan_header))
         if (myPlanIndex != -1) {
             val exercises1 = listOf(
-                ExerciseItem("Lateral Step-Up", BodyMuscle.GLUTEUS_MAXIMUS,null),
-                ExerciseItem("Squats", BodyMuscle.QUADRICEPS, null),
-                ExerciseItem("Hammer Curl", BodyMuscle.FOREARMS, null)
+                ExerciseItem("4","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                    BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),""),
+                ExerciseItem("5","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                    BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),""),
+                ExerciseItem("6","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                    BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),"")
             )
             exerciseList.addAll(myPlanIndex + 1, exercises1)
             adapter.notifyItemRangeInserted(myPlanIndex + 1, exercises1.size)

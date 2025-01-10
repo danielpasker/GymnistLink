@@ -1,14 +1,14 @@
 package com.example.gymnastlink.ui.adapters
 
-import android.graphics.BitmapFactory
+import ExerciseItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.gymnastlink.R
-import com.example.gymnastlink.model.ExerciseItem
 import com.example.gymnastlink.ui.fragments.onExerciseItemClickListener
 
 class ExerciseAdapter(private val exercises: List<Any>) :
@@ -43,12 +43,11 @@ class ExerciseAdapter(private val exercises: List<Any>) :
         fun bind(exercise: ExerciseItem){
             exerciseItem = exercise
             name.text = exercise.name
-            mainMuscle.text = exercise.mainMuscle.toString()
-            exercise.image?.let {
-                BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
-                    exerciseImage.setImageBitmap(bitmap)
-                }
-            }
+            mainMuscle.text = exercise.target.toString()
+            Glide.with(itemView.context)
+                .load(exercise.gifUrl)
+                .placeholder(R.drawable.placeholder_image)
+                .into(exerciseImage)
         }
     }
 
