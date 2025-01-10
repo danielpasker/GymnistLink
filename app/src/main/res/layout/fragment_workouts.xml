@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".ui.fragments.WorkoutsFragment">
 
     <LinearLayout
@@ -14,46 +16,84 @@
             android:id="@+id/search_workout_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+
             android:background="@drawable/gradient_background_blue"
             android:orientation="vertical"
-            android:paddingTop="20dp"
-            android:paddingBottom="15dp">
+            android:paddingLeft="16dp"
+            android:paddingTop="24dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="24dp">
 
             <TextView
                 android:id="@+id/workout_search_Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/cairo"
                 android:gravity="center"
                 android:text="@string/search_introduction"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
-            <SearchView
+            <EditText
                 android:id="@+id/workout_search"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="30dp"
-                android:iconifiedByDefault="false"
-                android:background="@drawable/workout_searchview"
-                android:queryHint="@string/search_hint" />
+                android:layout_height="45dp"
+                android:background="@drawable/input_background"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawableTint="@color/hint_color"
+                android:hint="@string/search_exercise_hint"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColorHint="@color/hint_color"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/workout_lists_layout"
+            android:id="@+id/search_results_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/search_results_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/cairo_bold"
+                android:text="@string/search_results"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/exercises_recyclerview"
+                android:id="@+id/search_results_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_plan_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/my_plan_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/cairo_bold"
+                android:text="@string/my_plan_header"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_plan_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

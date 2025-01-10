@@ -29,7 +29,7 @@
                 android:padding="16dp">
 
                 <EditText
-                    android:id="@+id/editTextExerciseName"
+                    android:id="@+id/editTextPostTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -40,7 +40,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/editTextExerciseDetails"
+                    android:id="@+id/editTextPostContent"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginBottom="16dp"
