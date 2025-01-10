@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card"
+            android:id="@+id/exercise_details_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -24,93 +24,95 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/exercuse_details_name_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Exercise Name"
-                    android:textSize="20dp" />
+                    android:layout_marginBottom="6dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/exercise_details_muscle_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginRight="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="3dp"
                         android:layout_weight="1"
                         android:background="@drawable/input_background"
-                        android:text="Muscle"
-                        android:padding="12dp"
-                        android:textSize="16sp" />
+                        android:padding="6dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/exercise_details_equipment_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="3dp"
                         android:layout_weight="1"
                         android:background="@drawable/input_background"
-                        android:text="hello"
-                        android:padding="12dp"
-                        android:textSize="16sp"/>
+                        android:padding="6dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"/>
 
                 </LinearLayout>
 
-                <EditText
+                <TextView
                     android:id="@+id/exercise_details_description"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="120dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/input_background"
                     android:gravity="top"
                     android:inputType="textMultiLine"
-                    android:padding="12dp"
-                    android:textSize="16sp"/>
+                    android:padding="6dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/exercise_details_sets_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginRight="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="3dp"
                         android:layout_weight="1"
                         android:background="@drawable/input_background"
-                        android:text="hello"
-                        android:padding="12dp"
-                        android:textSize="16sp"/>
+                        android:padding="6dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/exercise_details_reps_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="3dp"
                         android:layout_weight="1"
                         android:background="@drawable/input_background"
-                        android:text="hello"
-                        android:padding="12dp"
-                        android:textSize="16sp"/>
+                        android:padding="6dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"/>
 
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/exercise_details_img_view"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="140dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/placeholder_image"/>
 
             </LinearLayout>
@@ -141,18 +143,26 @@
             app:srcCompat="@drawable/ic_close"
             app:tint="@color/white" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/exercise_details_save_fab"
+        <FrameLayout
+            android:id="@+id/fab_frame_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            app:backgroundTint="@android:color/transparent"
-            app:fabCustomSize="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/ic_post_add"
-            app:tint="@color/fab_icon_color"/>
+            android:background="@drawable/gradient_background_blue" >
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/exercise_details_save_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:backgroundTint="@android:color/transparent"
+                app:fabCustomSize="65dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:maxImageSize="30dp"
+                app:srcCompat="@drawable/ic_post_add" />
+        </FrameLayout>
 
     </LinearLayout>
 
