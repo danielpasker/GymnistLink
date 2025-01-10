@@ -14,6 +14,8 @@
         <action
             android:id="@+id/action_updatesFragment_to_newPostFragment"
             app:destination="@id/newPostFragment"
+            app:popUpTo="@id/updatesFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -22,6 +24,8 @@
         <action
             android:id="@+id/action_updatesFragment_to_fragmentPostComment"
             app:destination="@id/postCommentsFragment"
+            app:popUpTo="@id/updatesFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
