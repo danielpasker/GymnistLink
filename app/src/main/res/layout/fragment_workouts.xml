@@ -30,14 +30,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:ellipsize="none"
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
-                android:maxLines="1"
                 android:text="@string/search_introduction"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/workout_search"
@@ -53,52 +51,18 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/search_results_layout"
+        <com.example.gymnastlink.ui.components.RecyclerWithTitleView
+            android:id="@+id/search_results_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/search_results_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/cairo_bold"
-                android:text="@string/search_results"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_results_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/my_plan_layout"
+        <com.example.gymnastlink.ui.components.RecyclerWithTitleView
+            android:id="@+id/my_plan_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/my_plan_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/cairo_bold"
-                android:text="@string/my_plan_header"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/my_plan_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

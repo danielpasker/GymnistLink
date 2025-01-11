@@ -10,12 +10,12 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.BodyMuscle
 import com.example.gymnastlink.model.ExerciseItem
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
+import com.example.gymnastlink.ui.components.RecyclerWithTitleView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,9 +23,8 @@ import kotlinx.coroutines.withContext
 class WorkoutsFragment : Fragment() {
 
     private lateinit var workoutSearchEditText: EditText
-    private lateinit var searchResultsLayout: View
-    private lateinit var searchResultsRecyclerView: RecyclerView
-    private lateinit var myPlanRecyclerView: RecyclerView
+    private lateinit var searchResultsView: RecyclerWithTitleView
+    private lateinit var myPlanView: RecyclerWithTitleView
     private lateinit var searchResultAdapter: ExerciseAdapter
     private lateinit var myPlanAdapter: ExerciseAdapter
 
@@ -46,19 +45,20 @@ class WorkoutsFragment : Fragment() {
         (activity as? MainActivity)?.setFragmentTitle(getString(R.string.workouts))
 
         workoutSearchEditText = view.findViewById(R.id.workout_search)
-        searchResultsLayout = view.findViewById(R.id.search_results_layout)
-        searchResultsRecyclerView = view.findViewById(R.id.search_results_recyclerview)
-        myPlanRecyclerView = view.findViewById(R.id.my_plan_recyclerview)
+        searchResultsView = view.findViewById(R.id.search_results_view)
+        myPlanView = view.findViewById(R.id.my_plan_view)
 
         myPlanAdapter = ExerciseAdapter(myPlan)
-        myPlanRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        myPlanRecyclerView.adapter = myPlanAdapter
-        myPlanRecyclerView.isNestedScrollingEnabled = false
+        myPlanView.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        myPlanView.recyclerView.adapter = myPlanAdapter
+        myPlanView.recyclerView.isNestedScrollingEnabled = false
+        myPlanView.title.text = getString(R.string.my_plan_header)
 
         searchResultAdapter = ExerciseAdapter(searchResults)
-        searchResultsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        searchResultsRecyclerView.adapter = searchResultAdapter
-        searchResultsRecyclerView.isNestedScrollingEnabled = false
+        searchResultsView.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        searchResultsView.recyclerView.adapter = searchResultAdapter
+        searchResultsView.recyclerView.isNestedScrollingEnabled = false
+        searchResultsView.title.text = getString(R.string.search_results)
 
         workoutSearchEditText.addTextChangedListener(createTextWatcher())
 
@@ -80,9 +80,9 @@ class WorkoutsFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.isNullOrEmpty()) {
-                    searchResultsLayout.visibility = View.GONE
+                    searchResultsView.visibility = View.GONE
                 } else {
-                    searchResultsLayout.visibility = View.VISIBLE
+                    searchResultsView.visibility = View.VISIBLE
                     // Filter search results asynchronously
                     lifecycleScope.launch {
                         getSearchResults(s.toString())
