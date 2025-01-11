@@ -3,7 +3,6 @@ package com.example.gymnastlink.ui
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -14,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
-    private lateinit var fragmentTitle: TextView
     private lateinit var toolbar: Toolbar
     private lateinit var navController: NavController
 
@@ -22,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fragmentTitle = findViewById(R.id.fragment_title)
         bottomNavigation = findViewById(R.id.bottom_navigation)
         val navHostController: NavHostFragment? =
             supportFragmentManager.findFragmentById(R.id.main_nav_controller) as? NavHostFragment
@@ -35,10 +32,6 @@ class MainActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             navController.navigateUp()
         }
-    }
-
-    fun setFragmentTitle(title: String) {
-        fragmentTitle.text = title
     }
 
     fun showReturnButtonOnToolbar(show: Boolean) {

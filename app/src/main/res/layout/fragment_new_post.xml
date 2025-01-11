@@ -7,15 +7,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
         android:clipChildren="false"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/new_post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/cairo_bold"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/input_background"
             app:cardBackgroundColor="@color/card_cyan_background"
             app:cardCornerRadius="16dp"

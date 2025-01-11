@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -32,9 +33,11 @@ class NewPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as? MainActivity
-        mainActivity?.setFragmentTitle(getString(R.string.new_post_text))
-        mainActivity?.showReturnButtonOnToolbar(true)
+        (activity as? MainActivity)?.showReturnButtonOnToolbar(true)
+
+        view.findViewById<TextView>(R.id.new_post_title).apply {
+            text = getString(R.string.new_post_text)
+        }
 
         imageView = view.findViewById(R.id.imgView)
         uploadImageButton = view.findViewById<Button>(R.id.upload_image_button).apply {

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.BodyMuscle
 import com.example.gymnastlink.model.ExerciseItem
-import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
 import com.example.gymnastlink.ui.components.RecyclerWithTitleView
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +41,6 @@ class WorkoutsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.workouts))
 
         workoutSearchEditText = view.findViewById(R.id.workout_search)
         searchResultsView = view.findViewById(R.id.search_results_view)

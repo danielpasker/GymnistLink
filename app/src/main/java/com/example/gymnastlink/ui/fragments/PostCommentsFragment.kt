@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Comment
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.CommentAdapter
+import com.example.gymnastlink.ui.components.RecyclerWithTitleView
 
 class PostCommentsFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var commentsView: RecyclerWithTitleView
     private lateinit var adapter: CommentAdapter
     private val commentList = mutableListOf<Comment>()
 
@@ -29,11 +29,11 @@ class PostCommentsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mainActivity = activity as? MainActivity
-        mainActivity?.setFragmentTitle(getString(R.string.comments))
         mainActivity?.showReturnButtonOnToolbar(true)
 
-        recyclerView = view.findViewById(R.id.post_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        commentsView = view.findViewById(R.id.comments_view)
+        commentsView.title.text = getString(R.string.comments)
+        commentsView.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize the comment list with some dummy data
         commentList.add(Comment("John Doe", "This is a comment."))
@@ -42,6 +42,6 @@ class PostCommentsFragment : Fragment() {
         commentList.add(Comment("Jane Smith", "This is another comment."))
 
         adapter = CommentAdapter(commentList)
-        recyclerView.adapter = adapter
+        commentsView.recyclerView.adapter = adapter
     }
 }
