@@ -10,53 +10,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.ExerciseItem
 
-class ExerciseAdapter(private val exercises: List<Any>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val TYPE_HEADER = 0
-    private val TYPE_ITEM = 1
-
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleText: TextView = itemView.findViewById(R.id.titleText)
-
-        fun bind(title: String) {
-            titleText.text = title
-        }
-    }
+class ExerciseAdapter(private val exercises: List<ExerciseItem>) :
+    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.exercise_name)
-        val mainMuscle: TextView = itemView.findViewById(R.id.exercise_main_muscle)
+        val exerciseName: TextView = itemView.findViewById(R.id.exercise_name)
         val exerciseImage: ImageView = itemView.findViewById(R.id.exercise_image)
+        val exerciseMainMuscle: TextView = itemView.findViewById(R.id.exercise_main_muscle)
+    }
 
-        fun bind(exercise: ExerciseItem){
-            name.text = exercise.name
-            mainMuscle.text = exercise.mainMuscle.toString()
-            exercise.image?.let {
-                BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
-                    exerciseImage.setImageBitmap(bitmap)
-                }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false)
+        return ExerciseViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
+        val exercise = exercises[position]
+        holder.exerciseName.text = exercise.name
+        holder.exerciseMainMuscle.text = exercise.mainMuscle.name
+
+        exercise.image?.let {
+            BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
+                holder.exerciseImage.setImageBitmap(bitmap)
             }
         }
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (exercises[position] is String) TYPE_HEADER else TYPE_ITEM
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            TYPE_HEADER -> HeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercises_header, parent, false))
-            TYPE_ITEM -> ExerciseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false))
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HeaderViewHolder -> holder.bind(exercises[position] as String)
-            is ExerciseViewHolder -> holder.bind(exercises[position] as ExerciseItem)
-        }
     }
 
     override fun getItemCount(): Int = exercises.size

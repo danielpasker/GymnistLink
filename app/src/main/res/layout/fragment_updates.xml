@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.UpdatesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <com.example.gymnastlink.ui.components.RecyclerWithTitleView
+        android:id="@+id/posts_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +25,7 @@
         android:layout_margin="12dp"
         android:contentDescription="@string/new_post_fab_description"
         android:text="@string/new_post_text"
-        app:icon="@android:drawable/ic_input_add"
+        app:icon="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

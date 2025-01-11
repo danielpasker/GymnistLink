@@ -14,4 +14,7 @@
     <color name="card_cyan_background">#003028</color>
     <color name="cancel_fab_color">#2F2F2F</color>
     <color name="fab_icon_color">@color/black</color>
+    <color name="comment_field_fill">@color/black</color>
+    <color name="comment_field_shadow">@color/gray</color>
+    <color name="add_comment_icon_fll">@color/black</color>
 </resources>
