@@ -8,14 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
+import com.example.gymnastlink.model.Converters
 import com.example.gymnastlink.model.Post
-import java.text.NumberFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
-class PostAdapter(private val posts: List<Post>) :
+class PostAdapter(private var posts: List<Post>) :
     RecyclerView.Adapter<PostAdapter.BlogPostViewHolder>() {
+
+    fun set(posts: List<Post>){
+        this.posts = posts
+    }
 
     class BlogPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userName: TextView = itemView.findViewById(R.id.user_name)
@@ -43,8 +44,8 @@ class PostAdapter(private val posts: List<Post>) :
 
         holder.title.text = post.title
         holder.content.text = post.content
-        holder.likeCount.text = formatNumber(post.likeCount)
-        holder.date.text = formatDate(post.date)
+        holder.likeCount.text = Converters.formatNumber(post.likeCount)
+        holder.date.text = Converters.formatDate(post.date)
 
         post.image?.let {
             BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
@@ -54,20 +55,4 @@ class PostAdapter(private val posts: List<Post>) :
     }
 
     override fun getItemCount(): Int = posts.size
-
-    fun formatDate(date: LocalDate, pattern: String = "dd/MM/yyyy"): String {
-        return try {
-            val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
-            date.format(formatter)
-        } catch (e: Exception) {
-            println("Error formatting date: ${e.message}")
-            ""
-        }
-    }
-
-    fun formatNumber(number: Number, locale: Locale = Locale.getDefault()): String {
-        val numberFormat = NumberFormat.getNumberInstance(locale)
-
-        return numberFormat.format(number)
-    }
 }
