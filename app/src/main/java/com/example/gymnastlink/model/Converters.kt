@@ -5,6 +5,7 @@ import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import android.util.Base64
 
 class Converters {
 
@@ -37,6 +38,14 @@ class Converters {
             val numberFormat = NumberFormat.getNumberInstance(locale)
 
             return numberFormat.format(number)
+        }
+
+        fun encodeImageToBase64(image: ByteArray): String {
+            return Base64.encodeToString(image, Base64.DEFAULT)
+        }
+
+        fun decodeImageFromBase64(imageString: String): ByteArray {
+            return Base64.decode(imageString, Base64.DEFAULT)
         }
     }
 }

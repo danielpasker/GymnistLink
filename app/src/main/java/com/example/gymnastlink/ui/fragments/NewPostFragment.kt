@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gymnastlink.R
+import com.example.gymnastlink.model.Converters
 import com.example.gymnastlink.model.Post
 import com.example.gymnastlink.model.PostModel
 import com.example.gymnastlink.ui.MainActivity
@@ -71,7 +72,7 @@ class NewPostFragment : Fragment() {
 
         view.findViewById<FloatingActionButton>(R.id.new_post_fab).apply {
             setOnClickListener {
-                val imageByteArray = postImageUri?.let {
+                val imageByteArray = postImageUri.let {
                     uri -> requireContext().contentResolver.openInputStream(uri)?.readBytes()
                 }
 
@@ -82,7 +83,7 @@ class NewPostFragment : Fragment() {
                     postId = UUID.randomUUID().toString(),
                     title = postTitle.text.toString(),
                     content = postContent.text.toString(),
-                    image = imageByteArray,
+                    image = imageByteArray?.let { Converters.encodeImageToBase64(it) },
                     likeCount = 3,
                     date = LocalDate.now()
                 )

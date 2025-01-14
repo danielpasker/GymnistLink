@@ -48,9 +48,9 @@ class PostAdapter(private var posts: List<Post>) :
         holder.date.text = Converters.formatDate(post.date)
 
         post.image?.let {
-            BitmapFactory.decodeByteArray(it, 0, it.size)?.let { bitmap ->
-                holder.postImage.setImageBitmap(bitmap)
-            }
+            val imageByteArray = Converters.decodeImageFromBase64(it)
+            BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)?.let {
+                bitmap -> holder.postImage.setImageBitmap(bitmap) }
         }
     }
 
