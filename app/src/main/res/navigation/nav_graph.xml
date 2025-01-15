@@ -45,6 +45,22 @@
         android:id="@+id/workoutsFragment"
         android:name="com.example.gymnastlink.ui.fragments.WorkoutsFragment"
         android:label="fragment_workouts"
-        tools:layout="@layout/fragment_workouts" />
+        tools:layout="@layout/fragment_workouts" >
+
+        <action
+            android:id="@+id/action_workoutsFragment_to_exerciseDetailsFragment"
+            app:destination="@id/exerciseDetailsFragment" >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseDetailsFragment"
+        android:name="com.example.gymnastlink.ui.fragments.ExerciseDetailsFragment"
+        android:label="ExerciseDetailsFragment" >
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.gymnastlink.ui.fragments
 
+import ExerciseItem
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,8 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gymnastlink.R
-import com.example.gymnastlink.model.BodyMuscle
-import com.example.gymnastlink.model.ExerciseItem
+import com.example.gymnastlink.model.BodyPart
+import com.example.gymnastlink.model.Equipment
+import com.example.gymnastlink.model.TargetMuscle
 import com.example.gymnastlink.ui.adapters.ExerciseAdapter
 import com.example.gymnastlink.ui.components.RecyclerWithTitleView
 import kotlinx.coroutines.Dispatchers
@@ -96,9 +98,21 @@ class WorkoutsFragment : Fragment() {
         withContext(Dispatchers.IO) {
             // Simulate data loading
             val dummyPlan = listOf(
-                ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
-                ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
-                ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
+                ExerciseItem("1","Dumbbells",Equipment.DUMBBELL,TargetMuscle.BICEPS,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "sit in a chair",
+                        "hold the dumbbells",
+                        "work on your biceps with the dumbbells"
+                    ),""),
+                ExerciseItem("2","Leg Extinction",Equipment.ELLIPTICAL_MACHINE,TargetMuscle.QUADS,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "get your legs up",
+                        "get your legs down"
+                    ),""),
+                ExerciseItem("3","Pull Ups",Equipment.BODY_WEIGHT,TargetMuscle.SPINE,
+                    BodyPart.UPPER_ARMS,emptyArray(), arrayOf(
+                        "Get up and down with all of your body"
+                    ),"")
             )
             myPlan.clear()
             myPlan.addAll(dummyPlan)
@@ -110,9 +124,12 @@ class WorkoutsFragment : Fragment() {
 
     private suspend fun getSearchResults(query: String) {
         val dummyResults = listOf(
-            ExerciseItem("Dumbbells", BodyMuscle.BICEPS, null),
-            ExerciseItem("Arnold Press", BodyMuscle.DELTOID, null),
-            ExerciseItem("Wrist Curl", BodyMuscle.FOREARMS, null)
+            ExerciseItem("4","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),""),
+            ExerciseItem("5","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),""),
+            ExerciseItem("6","Dumbbells",Equipment.UNKNOWN,TargetMuscle.BICEPS,
+                BodyPart.UPPER_ARMS,emptyArray(),emptyArray(),"")
         )
 
         withContext(Dispatchers.IO) {
