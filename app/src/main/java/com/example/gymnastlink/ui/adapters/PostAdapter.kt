@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Converters
@@ -31,7 +32,6 @@ class PostAdapter(private var posts: List<Post>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogPostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
-
         return BlogPostViewHolder(view)
     }
 
@@ -41,7 +41,6 @@ class PostAdapter(private var posts: List<Post>) :
         holder.userName.text = post.userName
         holder.userTitle.text = post.userTitle
         holder.userAvatar.text = post.userName.split(' ').map { it.first() }.joinToString("")
-
         holder.title.text = post.title
         holder.content.text = post.content
         holder.likeCount.text = Converters.formatNumber(post.likeCount)
@@ -51,6 +50,10 @@ class PostAdapter(private var posts: List<Post>) :
             val imageByteArray = Converters.decodeImageFromBase64(it)
             BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)?.let {
                 bitmap -> holder.postImage.setImageBitmap(bitmap) }
+        }
+
+        holder.itemView.setOnClickListener {
+            it.findNavController().navigate(R.id.action_updatesFragment_to_fragmentPostComment)
         }
     }
 

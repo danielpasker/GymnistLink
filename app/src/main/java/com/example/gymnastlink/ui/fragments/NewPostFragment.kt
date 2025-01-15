@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -36,21 +37,23 @@ class NewPostFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_new_post, container, false)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.new_post_text))
+        return inflater.inflate(R.layout.fragment_new_post, container, false)
+    }
 
-        view.findViewById<FloatingActionButton>(R.id.cancel_fab).apply {
-            setOnClickListener {
-                findNavController().navigateUp()
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (activity as? MainActivity)?.showReturnButtonOnToolbar(true)
+
+        view.findViewById<TextView>(R.id.new_post_title).apply {
+            text = getString(R.string.new_post_text)
         }
 
-        postTitle = view.findViewById(R.id.editTextExerciseName)
-        postContent = view.findViewById(R.id.editTextExerciseDetails)
+        postTitle = view.findViewById(R.id.editTextPostTitle)
+        postContent = view.findViewById(R.id.editTextPostContent)
         imageView = view.findViewById(R.id.imgView)
         uploadImageButton = view.findViewById<Button>(R.id.upload_image_button).apply {
             setOnClickListener { openImagePicker() }
@@ -70,7 +73,7 @@ class NewPostFragment : Fragment() {
                 }
             }
 
-        view.findViewById<FloatingActionButton>(R.id.new_post_fab).apply {
+        view.findViewById<FloatingActionButton>(R.id.save_post_fab).apply {
             setOnClickListener {
                 val imageByteArray = postImageUri.let {
                     uri -> requireContext().contentResolver.openInputStream(uri)?.readBytes()
@@ -93,8 +96,6 @@ class NewPostFragment : Fragment() {
                 }
             }
         }
-
-        return view
     }
 
     private fun openImagePicker() {
