@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Post
@@ -30,7 +31,6 @@ class PostAdapter(private val posts: List<Post>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogPostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
-
         return BlogPostViewHolder(view)
     }
 
@@ -40,7 +40,6 @@ class PostAdapter(private val posts: List<Post>) :
         holder.userName.text = post.userName
         holder.userTitle.text = post.userTitle
         holder.userAvatar.text = post.userName.split(' ').map { it.first() }.joinToString("")
-
         holder.title.text = post.title
         holder.content.text = post.content
         holder.likeCount.text = formatNumber(post.likeCount)
@@ -51,11 +50,15 @@ class PostAdapter(private val posts: List<Post>) :
                 holder.postImage.setImageBitmap(bitmap)
             }
         }
+
+        holder.itemView.setOnClickListener {
+            it.findNavController().navigate(R.id.action_updatesFragment_to_fragmentPostComment)
+        }
     }
 
     override fun getItemCount(): Int = posts.size
 
-    fun formatDate(date: LocalDate, pattern: String = "dd/MM/yyyy"): String {
+    private fun formatDate(date: LocalDate, pattern: String = "dd/MM/yyyy"): String {
         return try {
             val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
             date.format(formatter)
@@ -65,7 +68,7 @@ class PostAdapter(private val posts: List<Post>) :
         }
     }
 
-    fun formatNumber(number: Number, locale: Locale = Locale.getDefault()): String {
+    private fun formatNumber(number: Number, locale: Locale = Locale.getDefault()): String {
         val numberFormat = NumberFormat.getNumberInstance(locale)
 
         return numberFormat.format(number)

@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.gymnastlink.R
 import com.example.gymnastlink.ui.MainActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NewPostFragment : Fragment() {
 
@@ -25,18 +24,21 @@ class NewPostFragment : Fragment() {
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_new_post, container, false)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.new_post_text))
+        return inflater.inflate(R.layout.fragment_new_post, container, false)
+    }
 
-        view.findViewById<FloatingActionButton>(R.id.cancel_fab).apply {
-            setOnClickListener {
-                findNavController().navigateUp()
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (activity as? MainActivity)?.showReturnButtonOnToolbar(true)
+
+        view.findViewById<TextView>(R.id.new_post_title).apply {
+            text = getString(R.string.new_post_text)
         }
+
         imageView = view.findViewById(R.id.imgView)
         uploadImageButton = view.findViewById<Button>(R.id.upload_image_button).apply {
             setOnClickListener { openImagePicker() }
@@ -53,8 +55,6 @@ class NewPostFragment : Fragment() {
                     }
                 }
             }
-
-        return view
     }
 
     private fun openImagePicker() {

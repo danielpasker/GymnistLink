@@ -15,7 +15,6 @@ data class ExerciseItem(
     @SerializedName("secondaryMuscles") val secondaryMuscles: Array<String>,
     @SerializedName("instructions") val instructions: Array<String>,
     @SerializedName("gifUrl") val gifUrl: String
-//    TODO: Create a flag that indicates if the item is in my plan
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

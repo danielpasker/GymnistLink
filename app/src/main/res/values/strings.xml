@@ -17,8 +17,10 @@
     <string name="new_post_fab_text">New Post</string>
     <string name="temp_exercise_title">Exercise title</string>
     <string name="temp_body_part">Body part</string>
-    <string name="search_introduction">Use our providers to find your desired exercise</string>
-    <string name="search_hint">Search for an exercise</string>
-    <string name="recently_searched_header">Recently Searched</string>
+    <string name="search_introduction">Use our providers to find your exercise</string>
+    <string name="search_exercise_hint">Search for an exercise</string>
+    <string name="search_results">Search Results</string>
     <string name="my_plan_header">My Plan</string>
+    <string name="add_new_comment">Add new comment</string>
+    <string name="comments">Comments</string>
 </resources>

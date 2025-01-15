@@ -11,16 +11,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Post
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.PostAdapter
+import com.example.gymnastlink.ui.components.RecyclerWithTitleView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import java.time.LocalDate
 
 class UpdatesFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var postsView: RecyclerWithTitleView
     private lateinit var adapter: PostAdapter
     private lateinit var postsActivityLauncher: ActivityResultLauncher<Intent>
 
@@ -37,10 +37,14 @@ class UpdatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.setFragmentTitle(getString(R.string.updates))
 
-        recyclerView = view.findViewById(R.id.post_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val mainActivity = activity as? MainActivity
+        mainActivity?.showBottomNavigation(true)
+        mainActivity?.showReturnButtonOnToolbar(false)
+
+        postsView = view.findViewById(R.id.posts_view)
+        postsView.title.text = getString(R.string.updates)
+        postsView.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         view.findViewById<ExtendedFloatingActionButton>(R.id.new_post_fab).apply {
             setOnClickListener {
@@ -93,7 +97,7 @@ class UpdatesFragment : Fragment() {
         }
 
         adapter = PostAdapter(postList)
-        recyclerView.adapter = adapter
+        postsView.recyclerView.adapter = adapter
     }
 
     override fun onResume() {

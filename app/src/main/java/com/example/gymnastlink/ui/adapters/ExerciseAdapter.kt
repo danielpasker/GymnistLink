@@ -6,67 +6,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.gymnastlink.R
-import com.example.gymnastlink.ui.fragments.onExerciseItemClickListener
+import com.bumptech.glide.Glide
+import com.example.gymnastlink.ui.fragments.WorkoutsFragmentDirections
 
-class ExerciseAdapter(private val exercises: List<Any>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ExerciseAdapter(private val exercises: List<ExerciseItem>) :
+    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-    private val TYPE_HEADER = 0
-    private val TYPE_ITEM = 1
 
-    lateinit var listener: onExerciseItemClickListener
-
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleText: TextView = itemView.findViewById(R.id.titleText)
-
-        fun bind(title: String) {
-            titleText.text = title
-        }
-    }
-
-    class ExerciseViewHolder(itemView: View, listener: onExerciseItemClickListener?) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.exercise_name)
-        val mainMuscle: TextView = itemView.findViewById(R.id.exercise_main_muscle)
+    class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val exerciseName: TextView = itemView.findViewById(R.id.exercise_name)
         val exerciseImage: ImageView = itemView.findViewById(R.id.exercise_image)
-        lateinit var exerciseItem: ExerciseItem
-
-
-        init {
-            itemView.setOnClickListener{
-                listener?.onExerciseClick(adapterPosition, exerciseItem)
-            }
-        }
-
-        fun bind(exercise: ExerciseItem){
-            exerciseItem = exercise
-            name.text = exercise.name
-            mainMuscle.text = exercise.target.toString()
-            Glide.with(itemView.context)
-                .load(exercise.gifUrl)
-                .placeholder(R.drawable.placeholder_image)
-                .into(exerciseImage)
-        }
+        val exerciseMainMuscle: TextView = itemView.findViewById(R.id.exercise_main_muscle)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (exercises[position] is String) TYPE_HEADER else TYPE_ITEM
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false)
+        return ExerciseViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            TYPE_HEADER -> HeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercises_header, parent, false))
-            TYPE_ITEM -> ExerciseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false), listener)
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
-    }
+    override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
+        val exercise = exercises[position]
+        holder.exerciseName.text = exercise.name
+        holder.exerciseMainMuscle.text = exercise.target.name
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HeaderViewHolder -> holder.bind(exercises[position] as String)
-            is ExerciseViewHolder -> holder.bind(exercises[position] as ExerciseItem)
+        Glide.with(holder.itemView.context)
+            .load(exercise.gifUrl)
+            .placeholder(R.drawable.placeholder_image)
+            .into(holder.exerciseImage)
+
+        val action = WorkoutsFragmentDirections.actionWorkoutsFragmentToExerciseDetailsFragment(position)
+        holder.itemView.setOnClickListener {
+            it.findNavController().navigate(action)
         }
     }
 

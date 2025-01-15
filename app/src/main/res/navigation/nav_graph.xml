@@ -1,43 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/updatesFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/updatesFragment">
 
     <fragment
-            android:id="@+id/updatesFragment"
-            android:name="com.example.gymnastlink.ui.fragments.UpdatesFragment"
-            android:label="fragment_updates"
-            tools:layout="@layout/fragment_updates">
+        android:id="@+id/updatesFragment"
+        android:name="com.example.gymnastlink.ui.fragments.UpdatesFragment"
+        android:label="fragment_updates"
+        tools:layout="@layout/fragment_updates">
 
         <action
-                android:id="@+id/action_updatesFragment_to_newPostFragment"
-                app:destination="@id/newPostFragment"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_updatesFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_updatesFragment_to_fragmentPostComment"
+            app:destination="@id/postCommentsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
     </fragment>
 
     <fragment
-            android:id="@+id/newPostFragment"
-            android:name="com.example.gymnastlink.ui.fragments.NewPostFragment"
-            android:label="New Post"
-            tools:layout="@layout/fragment_new_post"/>
+        android:id="@+id/newPostFragment"
+        android:name="com.example.gymnastlink.ui.fragments.NewPostFragment"
+        android:label="New Post"
+        tools:layout="@layout/fragment_new_post" />
+
+    <fragment
+        android:id="@+id/postCommentsFragment"
+        android:name="com.example.gymnastlink.ui.fragments.PostCommentsFragment"
+        android:label="New Post"
+        tools:layout="@layout/fragment_post_comments" />
 
     <fragment
         android:id="@+id/workoutsFragment"
         android:name="com.example.gymnastlink.ui.fragments.WorkoutsFragment"
         android:label="fragment_workouts"
         tools:layout="@layout/fragment_workouts" >
+
         <action
             android:id="@+id/action_workoutsFragment_to_exerciseDetailsFragment"
-            app:destination="@id/exerciseDetailsFragment" />
+            app:destination="@id/exerciseDetailsFragment" >
+        </action>
+
     </fragment>
+
     <fragment
         android:id="@+id/exerciseDetailsFragment"
         android:name="com.example.gymnastlink.ui.fragments.ExerciseDetailsFragment"
-        android:label="ExerciseDetailsFragment" />
+        android:label="ExerciseDetailsFragment" >
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

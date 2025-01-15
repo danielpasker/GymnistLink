@@ -7,15 +7,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
         android:clipChildren="false"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/new_post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/cairo_bold"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/input_background"
             app:cardBackgroundColor="@color/card_cyan_background"
             app:cardCornerRadius="16dp"
@@ -29,7 +39,7 @@
                 android:padding="16dp">
 
                 <EditText
-                    android:id="@+id/editTextExerciseName"
+                    android:id="@+id/editTextPostTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -40,7 +50,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/editTextExerciseDetails"
+                    android:id="@+id/editTextPostContent"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginBottom="16dp"
@@ -90,42 +100,22 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_post_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
         android:clipChildren="false"
+        android:contentDescription="@string/save_new_post_description"
         android:gravity="center|end"
         android:orientation="horizontal"
+        app:backgroundTint="@color/cyan_button"
+        app:fabCustomSize="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/ic_post_add"
+        app:tint="@color/fab_icon_color" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cancel_fab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:clickable="true"
-            android:contentDescription="@string/save_new_post_description"
-            app:backgroundTint="@color/cancel_fab_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_close"
-            app:tint="@color/white" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/new_post_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@string/save_new_post_description"
-            app:backgroundTint="@color/cyan_button"
-            app:fabCustomSize="65dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/ic_post_add"
-            app:tint="@color/fab_icon_color" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
