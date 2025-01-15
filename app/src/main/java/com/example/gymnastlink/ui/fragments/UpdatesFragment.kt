@@ -11,8 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gymnastlink.R
 import com.example.gymnastlink.model.Post
+import com.example.gymnastlink.model.PostModel
 import com.example.gymnastlink.ui.MainActivity
 import com.example.gymnastlink.ui.adapters.PostAdapter
 import com.example.gymnastlink.ui.components.RecyclerWithTitleView
@@ -25,7 +27,7 @@ class UpdatesFragment : Fragment() {
     private lateinit var postsActivityLauncher: ActivityResultLauncher<Intent>
 
     companion object {
-        val postList = mutableListOf<Post>()
+        var postList = mutableListOf<Post>()
     }
 
     override fun onCreateView(
@@ -59,49 +61,22 @@ class UpdatesFragment : Fragment() {
                 }
             }
 
-        // TODO: delete when handling data from a real source
-        if (postList.isEmpty()) {
-            postList.add(
-                Post(
-                    "John Smith",
-                    "Heavy Lifter",
-                    "Post Title 1",
-                    "This is the first post content.",
-                    null,
-                    12,
-                    LocalDate.of(2024, 11, 27)
-                )
-            )
-            postList.add(
-                Post(
-                    "Jane Doe",
-                    "Runner",
-                    "Post Title 2",
-                    "This is the second post content.",
-                    null,
-                    0,
-                    LocalDate.of(2024, 11, 27)
-                )
-            )
-            postList.add(
-                Post(
-                    "Alex Kim",
-                    "Cyclist",
-                    "Post Title 3",
-                    "This is the third post content.",
-                    null,
-                    2,
-                    LocalDate.of(2024, 9, 25)
-                )
-            )
-        }
-
         adapter = PostAdapter(postList)
         postsView.recyclerView.adapter = adapter
+
+        getAllPosts()
+    }
+
+    private fun getAllPosts() {
+        PostModel.shared.getAllPosts {
+            postList = it.toMutableList()
+            adapter.set(it)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        getAllPosts()
     }
 }
